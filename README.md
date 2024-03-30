@@ -13,13 +13,16 @@ RESTful Endpoints: Define CRUD endpoints for creating, reading, updating, and de
 Flexibility: Easily switch between different database backends by changing the database configuration, without modifying the application code.
 Pydantic Models: Utilize Pydantic models for data validation and serialization/deserialization between API requests and database operations.
 Scalability: Build scalable APIs with FastAPI's asynchronous capabilities, allowing for high-performance data processing.
+
 Usage:
 
 Clone the repository.
-Install the required dependencies using pip install -r requirements.txt.
+Install Poetry following the instructions at Poetry's documentation.
+Navigate to the project directory and run poetry install to install project dependencies.
 Configure the database connection settings in the config.py file.
-Run the FastAPI application using uvicorn main:app --reload.
+Run the FastAPI application using poetry run uvicorn main:app --reload.
 Test the API endpoints using tools like curl, Postman, or any HTTP client.
+
 Contributing:
 
 Contributions are welcome! If you have any ideas for improvements, feature requests, or bug fixes, feel free to open an issue or submit a pull request.
