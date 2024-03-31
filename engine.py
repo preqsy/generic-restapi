@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-from .config import settings
+from config import settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
@@ -14,9 +14,11 @@ def get_db():
         yield db
     finally:
         db.close()
-        
 
-cluster = MongoClient(settings.MONGO_DATABASE_URL)
-db_name = cluster[settings.MONGO_DBNAME]
-collection = db_name[settings.MONGO_COLLECTION_NAME]
+def get_mongo_db():
+    cluster = MongoClient(settings.MONGO_DATABASE_URL)
+    db_name = cluster[settings.MONGO_DBNAME]
+    collection = db_name[settings.MONGO_COLLECTION_NAME]
+    return collection
+
     

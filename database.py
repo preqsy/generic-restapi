@@ -8,7 +8,7 @@ class Database(ABC):
 
     """
     @abstractmethod
-    async def create(self, user_data: dict) -> Optional[dict]:
+    def create(self, user_data: dict) -> Optional[dict]:
         """
         Creates a new user in the database.
 
@@ -20,7 +20,7 @@ class Database(ABC):
         """
         
     @abstractmethod
-    async def get_all_data(self, id: int) -> Optional[dict]:
+    def get_all_data(self) -> Optional[dict]:
         """
         Retrieves a user from the database based on their ID.
 
@@ -33,7 +33,7 @@ class Database(ABC):
         """
         
     @abstractmethod
-    async def get_data_by_id(self, id: int) -> Optional[dict]:
+    def get_data_by_id(self, id: int) -> Optional[dict]:
         """
         Retrieves an from the database based on it's ID.
 
@@ -46,7 +46,7 @@ class Database(ABC):
         """
         
     @abstractmethod
-    async def update_data(self, id: int, data_obj) -> Optional[dict]:
+    def update_data(self, id: int, data_obj) -> Optional[dict]:
         """
         Update an Item in the DB.
 
@@ -59,7 +59,7 @@ class Database(ABC):
                              or None if not found.
         """
         
-    async def delete_data(self, id: int) -> bool:
+    def delete_data(self, id: int) -> bool:
         """
         Deletes an Item.
         Args:
