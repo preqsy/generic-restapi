@@ -14,12 +14,12 @@ model.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 
-def get_databases(db, db_type="postgres") -> Union[PostgresDB, MongoDB]:
+def get_databases(db= Depends(get_db), db_type="postgres") -> Union[PostgresDB, MongoDB]:
     if db_type == "postgres":
-        db = Depends(get_db)
+        # db = Depends(get_db)
         return PostgresDB(db=db, model=Post)
     elif db_type == "mongo":
-        db=Depends(get_mongo_db)
+        # db=Depends(get_mongo_db)
         return MongoDB(db=db, model=PostM)
     
     raise ValueError
