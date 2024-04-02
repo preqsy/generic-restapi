@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Protocol
+from typing import Optional
 
 
 class Database(ABC):
@@ -7,8 +7,9 @@ class Database(ABC):
     This interface defines basic operations for interacting with the database.
 
     """
+
     @abstractmethod
-    def create(self, user_data: dict) -> Optional[dict]:
+    async def create(self, user_data: dict) -> Optional[dict]:
         """
         Creates a new user in the database.
 
@@ -18,7 +19,7 @@ class Database(ABC):
         Returns:
             Optional[dict]: A dictionary containing the created user information, or None on failure.
         """
-        
+
     @abstractmethod
     def get_all_data(self) -> Optional[dict]:
         """
@@ -31,7 +32,7 @@ class Database(ABC):
             Optional[dict]: A dictionary containing user information if found,
                              or None if not found.
         """
-        
+
     @abstractmethod
     def get_data_by_id(self, id: int) -> Optional[dict]:
         """
@@ -44,7 +45,7 @@ class Database(ABC):
             Optional[dict]: A dictionary containing user information if found,
                              or None if not found.
         """
-        
+
     @abstractmethod
     def update_data(self, id: int, data_obj) -> Optional[dict]:
         """
@@ -58,7 +59,7 @@ class Database(ABC):
             Optional[dict]: A dictionary containing user information if found,
                              or None if not found.
         """
-        
+
     def delete_data(self, id: int) -> bool:
         """
         Deletes an Item.

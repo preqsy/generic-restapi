@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional, TypeVar, Type
 
-from database import Database
+from base_database import Database
 from sqlalchemy.orm import Session
 
 from engine import Base
@@ -14,7 +14,7 @@ class PostgresDB(Database):
         self.db = db
         self.model = model
 
-    def create(self, data_obj) -> ModelType:
+    async def create(self, data_obj) -> ModelType:
         new_data = self.model(**data_obj.dict())
         self.db.add(new_data)
         self.db.commit()
