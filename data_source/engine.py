@@ -1,6 +1,6 @@
 from fastapi import Query
 from pymongo import MongoClient
-
+import logging
 
 from fastapi import Query
 
@@ -12,7 +12,7 @@ engine = create_engine(settings.POSTGRES_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-
+logger = logging.getLogger(__name__)
 def get_postgres_db():
     db = SessionLocal()
     try:
@@ -27,11 +27,13 @@ def get_mongo_db():
     collection = db_name[settings.MONGO_COLLECTION_NAME]
     return collection
 
-
 def get_databases(db_type: str = Query()):
+    logger.critical("Connecting to database.......")
     if db_type == "postgres":
+        logger.critical("Connecting to postgres.......")
         return get_postgres_db()
     elif db_type == "mongo":
+        logging.critical("Connecting to mongo.......")
         return get_mongo_db()
 
 

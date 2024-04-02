@@ -47,7 +47,7 @@ class Database(ABC):
         """
 
     @abstractmethod
-    def update_data(self, id: int, data_obj) -> Optional[dict]:
+    async def update_data(self, id: int, data_obj) -> Optional[dict]:
         """
         Update an Item in the DB.
 
@@ -60,7 +60,7 @@ class Database(ABC):
                              or None if not found.
         """
 
-    def delete_data(self, id: int) -> bool:
+    async def delete_data(self, id: int) -> bool:
         """
         Deletes an Item.
         Args:

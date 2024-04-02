@@ -6,8 +6,12 @@ from pydantic import BaseModel
 class PostCreate(BaseModel):
     title: str
     content: str
-    created_on: datetime = datetime.utcnow()
-    updated_on: Optional[datetime] = None
+
+
+class PostUpdate(BaseModel):
+    title: str
+    content: str
+    updated_on: datetime  = None
 
 
 class PostReturn(BaseModel):

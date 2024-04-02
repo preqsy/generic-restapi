@@ -5,7 +5,7 @@ from bson import ObjectId
 from pydantic import BaseModel
 from pymongo import ReturnDocument
 
-from base_database import Database
+from .base_database import Database
 from typing import TypeVar, Type
 from pymongo.database import Database as Mongo
 
@@ -37,20 +37,21 @@ class MongoDB(Database):
         query_result = self.db.find_one({"_id": ObjectId(id)})
         if not query_result:
             return None
+        query_result["id"] = str(query_result["_id"])
         return self.model(**query_result)
 
-    def update_data(self, id: int, data_obj) -> Optional[dict]:
-        update_data = data_obj.dict()
-        update_data["update_on"] = datetime.utcnow()
+    async def update_data(self, id: int, data_obj) -> Optional[dict | ModelType]:
+        update_data_dict = data_obj.dict()
+        update_data_dict["updated_on"] = datetime.utcnow()
+        update_data_dict["id"] = id
         data = self.db.find_one_and_update(
             {"_id": ObjectId(id)},
-            {"$set": update_data},
+            {"$set": update_data_dict},
             return_document=ReturnDocument.AFTER,
         )
+        return self.model(**update_data_dict)
 
-        return self.model(**update_data)
-
-    def delete_data(self, id: int) -> bool:
+    async def delete_data(self, id: int) -> bool:
         query_result = self.db.delete_one({"_id": ObjectId(id)})
         if query_result.deleted_count > 0:
             return True
