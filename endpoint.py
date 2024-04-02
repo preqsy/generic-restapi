@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, Response, status
 
 
-from data_source.data_source import database
-from data_source.base_database import Database
+from databases.database_router import database
+from databases.base_database import Database
 from exception import InvalidRequest
 from schema import PostCreate, PostReturn, PostUpdate
 

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 import model
-from data_source.engine import engine
+from databases.database_connections import engine
 import endpoint
 
 model.Base.metadata.create_all(bind=engine)

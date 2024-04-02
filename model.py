@@ -3,7 +3,7 @@ from typing import Optional
 
 
 from pydantic import BaseModel
-from data_source.engine import Base
+from databases.database_connections import Base
 from sqlalchemy import TIMESTAMP, Column, DateTime, Integer, String
 from sqlalchemy.sql.expression import text
 

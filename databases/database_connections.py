@@ -22,12 +22,14 @@ def get_postgres_db():
 
 
 def get_mongo_db():
+    """Returns a PostgreSQL database session."""
     cluster = MongoClient(settings.MONGO_DATABASE_URL)
     db_name = cluster[settings.MONGO_DBNAME]
     collection = db_name[settings.MONGO_COLLECTION_NAME]
     return collection
 
 def get_databases(db_type: str = Query()):
+    """Returns a connection to a MongoDB collection."""
     logger.critical("Connecting to database.......")
     if db_type == "postgres":
         logger.critical("Connecting to postgres.......")

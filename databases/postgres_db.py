@@ -4,7 +4,7 @@ from typing import Optional, TypeVar, Type
 from .base_database import Database
 from sqlalchemy.orm import Session
 
-from .engine import Base
+from .database_connections import Base
 
 ModelType = TypeVar("ModelType", bound=Base)
 
