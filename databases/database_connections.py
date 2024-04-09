@@ -13,7 +13,10 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 logger = logging.getLogger(__name__)
+
+
 def get_postgres_db():
+    """Returns a PostgreQSL database session."""
     db = SessionLocal()
     try:
         return db
@@ -22,11 +25,12 @@ def get_postgres_db():
 
 
 def get_mongo_db():
-    """Returns a PostgreSQL database session."""
+    """Returns a Mongo database session."""
     cluster = MongoClient(settings.MONGO_DATABASE_URL)
     db_name = cluster[settings.MONGO_DBNAME]
     collection = db_name[settings.MONGO_COLLECTION_NAME]
     return collection
+
 
 def get_databases(db_type: str = Query()):
     """Returns a connection to a MongoDB collection."""
@@ -37,5 +41,3 @@ def get_databases(db_type: str = Query()):
     elif db_type == "mongo":
         logging.critical("Connecting to mongo.......")
         return get_mongo_db()
-
-
